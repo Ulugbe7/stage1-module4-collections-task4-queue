@@ -8,22 +8,20 @@ import java.util.Queue;
 public class ArrayDequeCreator extends PriorityQueue<String> {
 
     public ArrayDeque<Integer> createArrayDeque(Queue<Integer> firstQueue, Queue<Integer> secondQueue) {
-        ArrayDeque<Integer> combinedDeck = new ArrayDeque<>();
-
-        while (!firstQueue.isEmpty() && !secondQueue.isEmpty()) {
-            combinedDeck.offer(firstQueue.poll());
-            combinedDeck.offer(firstQueue.poll());
-            firstQueue.offer(secondQueue.poll());
-            firstQueue.offer(secondQueue.poll());
-
-            combinedDeck.offer(secondQueue.poll());
-            combinedDeck.offer(secondQueue.poll());
-            secondQueue.offer(firstQueue.poll());
-            secondQueue.offer(firstQueue.poll());
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        deque.add(firstQueue.remove());
+        deque.add(firstQueue.remove());
+        deque.add(secondQueue.remove());
+        deque.add(secondQueue.remove());
+        while (!(firstQueue.isEmpty()) && !(secondQueue.isEmpty())) {
+            firstQueue.add(deque.removeLast());
+            deque.add(firstQueue.remove());
+            deque.add(firstQueue.remove());
+            secondQueue.add(deque.removeLast());
+            deque.add(secondQueue.remove());
+            deque.add(secondQueue.remove());
         }
-        combinedDeck.addAll(firstQueue);
-        combinedDeck.addAll(secondQueue);
 
-        return combinedDeck;
+        return deque;
     }
 }

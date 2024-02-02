@@ -7,18 +7,18 @@ import java.util.List;
 
 public class DishOrderDeterminer {
     public List<Integer> determineDishOrder(int numberOfDishes, int everyDishNumberToEat) {
-        Deque<Integer> deque = new LinkedList<>();
-        List<Integer> list = new ArrayList<>();
+        Deque<Integer> table = new LinkedList<>();
+        List<Integer> result = new ArrayList<>();
         for (int i = 1; i <= numberOfDishes; i++) {
-            deque.add(i);
+            table.add(i);
         }
-        while (!deque.isEmpty()) {
+        while (!table.isEmpty()) {
             for (int i = 3; i != 0; i--) {
-                deque.add(deque.removeFirst());
+                table.add(table.removeFirst());
             }
-            list.add(deque.removeFirst());
+            result.add(table.removeFirst());
         }
 
-        return list;
+        return result;
     }
 }
